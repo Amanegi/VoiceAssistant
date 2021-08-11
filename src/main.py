@@ -36,7 +36,7 @@ def listen():
         print(e)
         print("Pardon..")
         return "None"
-    return query_res.lower()
+    return query_res
 
 
 def greet():
@@ -62,7 +62,7 @@ def open_file(filename):
 if __name__ == '__main__':
     greet()
     while True:
-        query = listen()
+        query = listen().lower()
         print("User said: ", query)
         if 'good night' in query:
             speak("Bye bye!")
@@ -82,3 +82,13 @@ if __name__ == '__main__':
             music_dir = '/home/aman/Music'
             songs = os.listdir(music_dir)
             open_file(os.path.join(music_dir, songs[0]))
+        elif 'the time' in query:
+            currTime = datetime.datetime.now().strftime("%-I:%-M %p")
+            print(currTime)
+            speak(f"The time is ${currTime}")
+        elif 'the date' in query:
+            currTime = datetime.datetime.now().strftime("%-dth of %B %Y %A")
+            print(currTime)
+            speak(f"Today is ${currTime}")
+        elif 'open vs code' in query:
+            os.popen('code')
